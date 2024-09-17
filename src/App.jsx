@@ -89,6 +89,12 @@ const App = () => {
     setViewMode('list');
   };
 
+  // Function to handle creating a new book
+  const handleCreateNewBook = () => {
+    setSelectedBook(null); // Reset selectedBook to null for new book creation
+    setViewMode('edit');    // Switch to 'edit' mode to show the form
+  };
+
   // Rendering loading and error states
   if (loading) {
     return <div>Loading...</div>;
@@ -101,12 +107,15 @@ const App = () => {
   return (
     <div>
       {viewMode === 'list' && (
-        <BookList
-          books={books}
-          onView={handleView}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-        />
+        <div>
+          <BookList
+            books={books}
+            onView={handleView}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            onCreate={handleCreateNewBook}  // Pass onCreate prop to BookList
+          />
+        </div>
       )}
       {viewMode === 'view' && (
         <ViewBook

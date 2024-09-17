@@ -1,10 +1,14 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
 const ViewBook = ({ book, onEdit, onDelete, onBack }) => {
+  const handleDelete = () => {
+    onDelete(book.id);
+  };
+
   return (
-    <div>
-      <h2>View Book</h2>
-      <table>
+    <div className="view-book-container">
+      <h1 className="center">View Book</h1>
+      <table className="book-table">
         <thead>
           <tr>
             <th>TITLE</th>
@@ -18,11 +22,20 @@ const ViewBook = ({ book, onEdit, onDelete, onBack }) => {
           </tr>
         </tbody>
       </table>
-      <button onClick={() => onEdit(book.id)}>Edit</button>
-      <button onClick={() => onDelete(book.id)}>Delete</button>
-      <button onClick={onBack}>Back to List</button>
+      <div className="button-container">
+        <button className="edit-button" onClick={() => onEdit(book.id)}>Edit</button>
+        <button className="delete-button" onClick={handleDelete}>Delete</button>
+        <button className="back-button" onClick={onBack}>Back to List</button>
+      </div>
     </div>
   );
+};
+
+ViewBook.propTypes = {
+  book: PropTypes.object.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onBack: PropTypes.func.isRequired,
 };
 
 export default ViewBook;

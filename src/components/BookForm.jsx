@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const BookForm = ({ book, onSave, onBack }) => {
   const [title, setTitle] = useState('');
@@ -18,7 +19,7 @@ const BookForm = ({ book, onSave, onBack }) => {
 
   return (
     <div>
-      <h2>{book ? 'Edit Book' : 'Create Book'}</h2>
+      <h1>{book ? 'Edit Book' : 'Create Book'}</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Title:</label>
@@ -38,9 +39,18 @@ const BookForm = ({ book, onSave, onBack }) => {
         </div>
         <button type="submit">Save</button>
       </form>
-      <button onClick={onBack}>Back to List</button>
+      <div className="button-container">
+        <button onClick={onBack}>Back to List</button>
+      </div>
+
     </div>
   );
+};
+
+BookForm.propTypes = {
+  book: PropTypes.object,
+  onSave: PropTypes.func.isRequired,
+  onBack: PropTypes.func.isRequired,
 };
 
 export default BookForm;
