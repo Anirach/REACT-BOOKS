@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'; // Import PropTypes
 const BookList = ({ books, onView, onEdit, onDelete, onCreate }) => {
   return (
     <div className="book-list-container">
-      <h1 className="center">Books</h1> {/* Center the title */}
-      <table className="book-table"> {/* Use global table styles */}
+      <h1 className="center">Books</h1>
+      <table className="book-table">
         <thead>
           <tr>
             <th>TITLE</th>
@@ -27,7 +27,6 @@ const BookList = ({ books, onView, onEdit, onDelete, onCreate }) => {
         </tbody>
       </table>
       
-      {/* Center the Create New Book button */}
       <div className="button-container">
         <button className="create-button" onClick={onCreate}>Create New Book</button>
       </div>
