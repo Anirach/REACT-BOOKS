@@ -4,7 +4,7 @@ import BookList from './components/BookList';
 import ViewBook from './components/ViewBook';
 import BookForm from './components/BookForm';
 
-const API_URL = 'https://node65644-rach-app.proen.app.ruk-com.cloud/books';
+const API_URL = '/api/books';
 
 const App = () => {
   const [books, setBooks] = useState([]);
@@ -17,7 +17,8 @@ const App = () => {
   const handleError = (err) => {
     if (err.response) {
       // Server responded with a status code outside 2xx range
-      setError(`Error: ${err.response.status} - ${err.response.data.message}`);
+      const message = err.response.data?.message || err.response.data || 'Request failed.';
+      setError(`Error: ${err.response.status} - ${message}`);
     } else if (err.request) {
       // Request was made but no response received
       setError('Network error: No response received from server.');
@@ -34,7 +35,7 @@ const App = () => {
       try {
         setLoading(true);
         const response = await axios.get(API_URL);
-        setBooks(response.data);
+        setBooks(Array.isArray(response.data) ? response.data : []);
         setError(null);  // Clear any previous errors
         setLoading(false);
       } catch (err) {
